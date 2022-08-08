@@ -1,0 +1,189 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SendExceptionEmail"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:xme="clr-namespace:XOM.Mail.Exchange;assembly=Xom.Mail.Activities">
+  <x:Members>
+    <x:Property Name="ExceptionEmail" Type="InArgument(x:String)" />
+    <x:Property Name="Subject" Type="InArgument(x:String)" />
+    <x:Property Name="Body" Type="InArgument(x:String)" />
+    <x:Property Name="IsBodyHTML" Type="InArgument(x:Boolean)" />
+    <x:Property Name="SentCompletedFlag" Type="OutArgument(x:Boolean)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SendExceptionEmail_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <TryCatch DisplayName="SendExceptionEmail" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch.Try>
+      <Sequence DisplayName="SendExceptionEmail" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="ui:Image" Name="screen" />
+          <Variable x:TypeArguments="x:String" Name="imgPath" />
+          <Variable x:TypeArguments="x:Boolean" Name="pathExist" />
+        </Sequence.Variables>
+        <ui:LogMessage DisplayName="Log message" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="Send exception email" />
+        <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take screenshot" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[screen]">
+          <ui:TakeScreenshot.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+          </ui:TakeScreenshot.Target>
+        </ui:TakeScreenshot>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[imgPath]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">["C:\XOM\SPTTemp\ScreenShot"+now.ToString("ddMMyyyyHHmmss")+".jpg"]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:PathExists DisplayName="Path exists" Exists="[pathExist]" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[imgPath]" PathType="File" />
+        <If Condition="[pathExist]" sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Then>
+            <ui:Delete ContinueOnError="{x:Null}" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[imgPath]" />
+          </If.Then>
+        </If>
+        <ui:SaveImage DisplayName="Save image" FileName="[imgPath]" sap2010:WorkflowViewState.IdRef="SaveImage_1" Image="[screen]" />
+        <If Condition="[IsBodyHTML]" sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Then>
+            <xme:XOMSendExchangeMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" Domain="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" TimeoutMS="{x:Null}" User="{x:Null}" Attachments="[imgPath]" Body="[Body]" DisplayName="XOM Send Exchange Mail Message" ExchangeVersion="Exchange2013_SP1" sap2010:WorkflowViewState.IdRef="XOMSendExchangeMail_4" IsBodyHtml="True" IsDraft="False" Priority="Normal" SaveCopy="False" SaveTo="Local" Server="https://outlook-na.xom.com/ews/exchange.asmx" Subject="[Subject]" To="[ExceptionEmail]" UseDefaultCredentials="True" />
+          </If.Then>
+          <If.Else>
+            <xme:XOMSendExchangeMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" Domain="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" TimeoutMS="{x:Null}" User="{x:Null}" Attachments="[imgPath]" Body="[Body]" DisplayName="XOM Send Exchange Mail Message" ExchangeVersion="Exchange2013_SP1" sap2010:WorkflowViewState.IdRef="XOMSendExchangeMail_1" IsBodyHtml="False" IsDraft="False" Priority="Normal" SaveCopy="False" SaveTo="Local" Server="https://outlook-na.xom.com/ews/exchange.asmx" Subject="[Subject]" To="[ExceptionEmail]" UseDefaultCredentials="True" />
+          </If.Else>
+        </If>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Boolean">[SentCompletedFlag]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </TryCatch.Try>
+    <TryCatch.Catches>
+      <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <ActivityAction x:TypeArguments="s:Exception">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+          </ActivityAction.Argument>
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:LogMessage DisplayName="Log message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Error in SendExceptionEmail: &quot;+Subject+vbcrlf+Body+vbcrlf+exception.ToString]" />
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[SentCompletedFlag]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </Catch>
+    </TryCatch.Catches>
+    <sads:DebugSymbol.Symbol>d3hDOlxVc2Vyc1xSUEFGTENTTUQwMDNcRG9jdW1lbnRzXFJQQVxVaVBhdGhcREVWXFByb2plY3RzXEZMQ1NNT05cUHJvYWN0aXZlX1YyXFJldXNhYmxlIENvbXBvbmVudHNcU2VuZEV4Y2VwdGlvbkVtYWlsLnhhbWwqSAOMAQ4CAQFKB3USAgEJfQuHARYCAQJQCVCPAQIBPFEJVR0CATlWCV0SAgE1XglemQECATBfCWMOAgEqZAlkhgECASVlCWwOAgEObQl0EgIBCn4NftkBAgEHfw2GARYCAQNQdlCMAQIBPVGOAVGYAQIBOls0W3cCAThYNVg+AgE2XjleRgIBM157XoYBAgExXxdfJAIBK2ENYXECAS1kOWREAgEoZHlkgwECASZlF2UlAgEPZw1nuQQCARtqDWq6BAIBEXI1cjkCAQ1vNm9JAgELfnt+1gECAQiEATmEAT4CAQaBATqBAU0CAQRhY2FuAgEuZ4cEZ5kEAgEjZ8QBZ88BAgEhZ9UBZ90BAgEfZ/gDZ4MEAgEdZ8EDZ+8DAgEcaogEapoEAgEZasQBas8BAgEXatUBat0BAgEVavkDaoQEAgETasIDavADAgES</sads:DebugSymbol.Symbol>
+  </TryCatch>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91" />
+      <sap2010:ViewStateData Id="TakeScreenshot_1" sap:VirtualizedContainerService.HintSize="464,68" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="PathExists_1" sap:VirtualizedContainerService.HintSize="464,89" />
+      <sap2010:ViewStateData Id="Delete_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="SaveImage_1" sap:VirtualizedContainerService.HintSize="464,92" />
+      <sap2010:ViewStateData Id="XOMSendExchangeMail_4" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="XOMSendExchangeMail_1" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1280">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,315">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="490,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="504,1587" />
+      <sap2010:ViewStateData Id="SendExceptionEmail_1" sap:VirtualizedContainerService.HintSize="544,1747" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
