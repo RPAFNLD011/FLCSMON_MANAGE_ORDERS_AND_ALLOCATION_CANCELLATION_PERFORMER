@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1244,10502</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,10729</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetSapWindow_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -84,8 +84,8 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -93,7 +93,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Try to get SAP window" sap:VirtualizedContainerService.HintSize="1199,10437" sap2010:WorkflowViewState.IdRef="Sequence_20">
+  <Sequence DisplayName="Try to get SAP window" sap:VirtualizedContainerService.HintSize="1199,10664" sap2010:WorkflowViewState.IdRef="Sequence_20">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="maxRetries" />
       <Variable x:TypeArguments="x:Int32" Name="retryCount" />
@@ -154,8 +154,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <While sap:VirtualizedContainerService.HintSize="1157,9481" sap2010:WorkflowViewState.IdRef="While_1" Condition="[NOT (taskCompleted)]">
-      <Sequence sap:VirtualizedContainerService.HintSize="1111,9323" sap2010:WorkflowViewState.IdRef="Sequence_21">
+    <While sap:VirtualizedContainerService.HintSize="1157,9708" sap2010:WorkflowViewState.IdRef="While_1" Condition="[NOT (taskCompleted)]">
+      <Sequence sap:VirtualizedContainerService.HintSize="1111,9550" sap2010:WorkflowViewState.IdRef="Sequence_21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -169,11 +169,11 @@
             <InArgument x:TypeArguments="x:Int32">[retryCount + 1]</InArgument>
           </Assign.Value>
         </Assign>
-        <If Condition="[retryCount &gt; 1]" sap:VirtualizedContainerService.HintSize="1069,51" sap2010:WorkflowViewState.IdRef="If_12">
+        <If Condition="[retryCount &gt; 1]" sap:VirtualizedContainerService.HintSize="1069,278" sap2010:WorkflowViewState.IdRef="If_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <If.Then>
@@ -211,7 +211,7 @@
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <TryCatch DisplayName="Try catch" sap:VirtualizedContainerService.HintSize="516,1152" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <TryCatch DisplayName="Try catch" sap:VirtualizedContainerService.HintSize="947,1152" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -797,7 +797,7 @@
             <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1035,624" sap2010:WorkflowViewState.IdRef="Catch`1_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -805,7 +805,7 @@
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                 </ActivityAction.Argument>
-                <If Condition="[retryCount &lt; maxRetries]" sap:VirtualizedContainerService.HintSize="836,555" sap2010:WorkflowViewState.IdRef="If_11">
+                <If Condition="[retryCount &lt; maxRetries]" sap:VirtualizedContainerService.HintSize="830,555" sap2010:WorkflowViewState.IdRef="If_11">
                   <If.Then>
                     <Sequence sap:VirtualizedContainerService.HintSize="376,368" sap2010:WorkflowViewState.IdRef="Sequence_22">
                       <sap:WorkflowViewStateService.ViewState>
@@ -825,14 +825,14 @@
                     </Sequence>
                   </If.Then>
                   <If.Else>
-                    <Sequence sap:VirtualizedContainerService.HintSize="415,397" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                    <Sequence sap:VirtualizedContainerService.HintSize="409,397" sap2010:WorkflowViewState.IdRef="Sequence_25">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="373,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Error" Message="[&quot;GetSapWindow/ Fail at attempt#&quot; + retryCount.ToString + &quot; Exception &quot; + exception.ToString]" />
-                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SendExceptionEmail workflow" sap:VirtualizedContainerService.HintSize="373,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Reuseable Components\SendExceptionEmail.xaml">
+                      <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="367,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Error" Message="[&quot;GetSapWindow/ Fail at attempt#&quot; + retryCount.ToString + &quot; Exception &quot; + exception.ToString]" />
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SendExceptionEmail workflow" sap:VirtualizedContainerService.HintSize="367,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Reusable Components\SendExceptionEmail.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExceptionEmail">[exceptionEmail]</InArgument>
                           <InArgument x:TypeArguments="x:String" x:Key="Subject">Manage order Blocks Distributor Exception</InArgument>
@@ -841,7 +841,7 @@
                           <OutArgument x:TypeArguments="x:Boolean" x:Key="SentCompletedFlag" />
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
-                      <Rethrow sap:VirtualizedContainerService.HintSize="373,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                      <Rethrow sap:VirtualizedContainerService.HintSize="367,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
                     </Sequence>
                   </If.Else>
                 </If>
